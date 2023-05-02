@@ -1,4 +1,11 @@
 {
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true
+        }
+    },
+    "python.linting.mypyEnabled": true,
     "python.testing.pytestArgs": [
         "tests"
     ],
@@ -6,5 +13,6 @@
     "python.testing.pytestEnabled": true,
     "cSpell.words": [
         "raytracer"
-    ]
+    ],
+    "json.format.keepLines": true,
 }
