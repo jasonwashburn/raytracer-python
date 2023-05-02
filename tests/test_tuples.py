@@ -61,3 +61,11 @@ def test_subtract_vector_from_zero() -> None:
 
 def test_negating_a_tuple() -> None:
     assert -TupleFeature((1, -2, 3, -4)) == TupleFeature((-1, 2, -3, 4))
+
+
+def test_multiplying_tuple_by_a_scalar() -> None:
+    assert TupleFeature((1, -2, 3, -4)) * 3.5 == TupleFeature((3.5, -7, 10.5, -14))
+
+
+def test_multiplying_tuple_by_a_fraction() -> None:
+    assert TupleFeature((1, -2, 3, -4)) * 0.5 == TupleFeature((0.5, -1, 1.5, -2))
