@@ -48,6 +48,13 @@ class TupleFeature:
         w = self.w * other
         return TupleFeature((x, y, z, w))
 
+    def __truediv__(self, other: float | int) -> TupleFeature:
+        x = self.x / other
+        y = self.y / other
+        z = self.z / other
+        w = self.w / other
+        return TupleFeature((x, y, z, w))
+
 
 class Point(TupleFeature):
     def __init__(self, coords: tuple[float, float, float, float]) -> None:

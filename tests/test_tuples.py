@@ -69,3 +69,7 @@ def test_multiplying_tuple_by_a_scalar() -> None:
 
 def test_multiplying_tuple_by_a_fraction() -> None:
     assert TupleFeature((1, -2, 3, -4)) * 0.5 == TupleFeature((0.5, -1, 1.5, -2))
+
+
+def test_dividing_a_tuple_by_a_scalar() -> None:
+    assert TupleFeature((1, -2, 3, -4)) / 2 == TupleFeature((0.5, -1, 1.5, -2))
