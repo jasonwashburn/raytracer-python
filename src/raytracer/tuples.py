@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from math import sqrt
+
 
 class TupleFeature:
     def __init__(self, coords: tuple[float, float, float, float]) -> None:
@@ -57,18 +59,28 @@ class TupleFeature:
 
 
 class Point(TupleFeature):
-    def __init__(self, coords: tuple[float, float, float, float]) -> None:
-        super().__init__(coords)
+    def __init__(self, coords: tuple[float, float, float]) -> None:
+        super().__init__((*coords, 1))
+
+    def __repr__(self) -> str:
+        return f"Point({(self.x, self.y, self.z)})"
 
 
 class Vector(TupleFeature):
-    def __init__(self, coords: tuple[float, float, float, float]) -> None:
-        super().__init__(coords)
+    def __init__(self, coords: tuple[float, float, float]) -> None:
+        super().__init__((*coords, 0))
+
+    def __repr__(self) -> str:
+        return f"Vector({(self.x, self.y, self.z)})"
 
 
 def point(x: float, y: float, z: float) -> Point:
-    return Point((x, y, z, 1))
+    return Point((x, y, z))
 
 
 def vector(x: float, y: float, z: float) -> Vector:
-    return Vector((x, y, z, 0))
+    return Vector((x, y, z))
+
+
+def magnitude(vector: Vector) -> int | float:
+    return sqrt((vector.x**2) + (vector.y**2) + (vector.z**2) + (vector.w**2))

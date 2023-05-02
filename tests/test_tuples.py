@@ -1,8 +1,12 @@
-from raytracer.tuples import Point, TupleFeature, Vector, point, vector
+from math import sqrt
+
+import pytest
+
+from raytracer.tuples import Point, TupleFeature, Vector, magnitude, point, vector
 
 
 def test_point() -> None:
-    victim = Point((4.3, -4.2, 3.1, 1.0))
+    victim = Point((4.3, -4.2, 3.1))
     assert victim.x == 4.3
     assert victim.y == -4.2
     assert victim.z == 3.1
@@ -12,7 +16,7 @@ def test_point() -> None:
 
 
 def test_vector() -> None:
-    victim = Vector((4.3, -4.2, 3.1, 0))
+    victim = Vector((4.3, -4.2, 3.1))
     assert victim.x == 4.3
     assert victim.y == -4.2
     assert victim.z == 3.1
@@ -73,3 +77,27 @@ def test_multiplying_tuple_by_a_fraction() -> None:
 
 def test_dividing_a_tuple_by_a_scalar() -> None:
     assert TupleFeature((1, -2, 3, -4)) / 2 == TupleFeature((0.5, -1, 1.5, -2))
+
+
+@pytest.mark.parametrize(
+    "vector, expected",
+    [
+        (vector(0, 1, 0), 1),
+        (vector(0, 1, 0), 1),
+        (vector(0, 0, 1), 1),
+        (vector(1, 2, 3), sqrt(14)),
+        (vector(-1, -2, -3), sqrt(14)),
+    ],
+)
+def test_magnitude(vector: Vector, expected: int | float) -> None:
+    assert magnitude(vector) == expected
+
+
+def test_vector_repr_can_build_from_eval() -> None:
+    victim = vector(1, 2, 3)
+    assert eval(repr(victim)) == victim
+
+
+def test_point_repr_can_build_from_eval() -> None:
+    victim = point(1, 2, 3)
+    assert eval(repr(victim)) == victim
