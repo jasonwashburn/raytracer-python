@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class TupleFeature:
     def __init__(self, coords: tuple[float, float, float, float]) -> None:
         self.coords = coords
@@ -16,6 +19,27 @@ class TupleFeature:
 
     def __eq__(self, other: object) -> bool:
         return self.coords == other
+
+    def __add__(self, other: TupleFeature) -> TupleFeature:
+        x = self.x + other.x
+        y = self.y + other.y
+        z = self.z + other.z
+        w = self.w + other.w
+        return TupleFeature((x, y, z, w))
+
+    def __sub__(self, other: TupleFeature) -> TupleFeature:
+        x = self.x - other.x
+        y = self.y - other.y
+        z = self.z - other.z
+        w = self.w - other.w
+        return TupleFeature((x, y, z, w))
+
+    def __neg__(self) -> TupleFeature:
+        x = -self.x
+        y = -self.y
+        z = -self.z
+        w = -self.w
+        return TupleFeature((x, y, z, w))
 
 
 class Point(TupleFeature):
