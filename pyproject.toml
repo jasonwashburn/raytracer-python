@@ -10,9 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 keywords = []
-authors = [
-  { name = "Jason Washburn", email = "jason.washburn@gmail.com" },
-]
+authors = [{ name = "Jason Washburn", email = "jason.washburn@gmail.com" }]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -35,45 +33,28 @@ path = "src/raytracer/__about__.py"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
-  "pre-commit"
+  "pre-commit",
+  "black",
+  "ruff",
+  "mypy",
 ]
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.10", "3.11"]
 
 [tool.hatch.envs.lint]
 detached = true
-dependencies = [
-  "black>=23.1.0",
-  "mypy>=1.0.0",
-  "ruff>=0.0.243",
-]
+dependencies = ["black>=23.1.0", "mypy>=1.0.0", "ruff>=0.0.243"]
 [tool.hatch.envs.lint.scripts]
 typing = "mypy --install-types --non-interactive {args:src/raytracer tests}"
-style = [
-  "ruff {args:.}",
-  "black --check --diff {args:.}",
-]
-fmt = [
-  "black {args:.}",
-  "ruff --fix {args:.}",
-  "style",
-]
-all = [
-  "style",
-  "typing",
-]
+style = ["ruff {args:.}", "black --check --diff {args:.}"]
+fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
+all = ["style", "typing"]
 
 [tool.black]
 target-version = ["py310"]
@@ -110,7 +91,7 @@ select = [
   "W",
   "YTT",
 ]
-ignore =  [] 
+ignore = []
 
 unfixable = [
   # Don't touch unused imports
@@ -131,17 +112,11 @@ ban-relative-imports = "all"
 source_pkgs = ["raytracer", "tests"]
 branch = true
 parallel = true
-omit = [
-  "src/raytracer/__about__.py",
-]
+omit = ["src/raytracer/__about__.py"]
 
 [tool.coverage.paths]
 raytracer = ["src/raytracer", "*/raytracer/src/raytracer"]
 tests = ["tests", "*/raytracer/tests"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
