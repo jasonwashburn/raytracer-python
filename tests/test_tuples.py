@@ -1,4 +1,4 @@
-from raytracer.tuples import Point, Vector
+from raytracer.tuples import Point, Vector, point, vector
 
 
 def test_point() -> None:
@@ -19,3 +19,13 @@ def test_vector() -> None:
     assert victim.w == 0
     assert victim.is_vector
     assert not victim.is_point
+
+
+def test_point_creates_tuples_with_w_equals_1() -> None:
+    victim = point(4, -4, 3)
+    assert victim == (4, -4, 3, 1)
+
+
+def test_vector_creates_tuples_with_w_equals_0() -> None:
+    victim = vector(4, -4, 3)
+    assert victim == (4, -4, 3, 0)
