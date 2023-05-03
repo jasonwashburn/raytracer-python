@@ -74,6 +74,20 @@ class Vector(TupleFeature):
         return f"Vector({self.coords})"
 
 
+class Color:
+    def __init__(self, red: float, green: float, blue: float) -> None:
+        self.rgb = (red, green, blue)
+        self.red = red
+        self.green = green
+        self.blue = blue
+
+    def __eq__(self, other: object) -> bool:
+        return self.rgb == other
+
+    def __repr__(self) -> str:
+        return f"Color({self.red}, {self.green}, {self.blue})"
+
+
 def point(x: float, y: float, z: float, w: float = 1) -> Point:
     return Point((x, y, z, w))
 
@@ -98,10 +112,6 @@ def dot(vec_a: Vector, vec_b: Vector) -> int | float:
 
 
 def cross(vec_a: Vector, vec_b: Vector) -> Vector:
-    """vector(a.y * b.z - a.z * b.y,
-    end function
-    a.z * b.x - a.x * b.z,
-    a.x * b.y - a.y * b.x)"""
     return vector(
         vec_a.y * vec_b.z - vec_a.z * vec_b.y,
         vec_a.z * vec_b.x - vec_a.x * vec_b.z,

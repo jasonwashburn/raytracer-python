@@ -2,7 +2,7 @@ from math import sqrt
 
 import pytest
 
-from raytracer.tuples import Point, TupleFeature, Vector, cross, dot, magnitude, normalize, point, vector
+from raytracer.tuples import Color, Point, TupleFeature, Vector, cross, dot, magnitude, normalize, point, vector
 
 
 def test_point() -> None:
@@ -127,3 +127,18 @@ def test_cross_product_of_two_vectors() -> None:
     vector_b = vector(2, 3, 4)
     assert cross(vector_a, vector_b) == vector(-1, 2, -1)
     assert cross(vector_b, vector_a) == vector(1, -2, 1)
+
+
+def test_colors_are_red_green_blue_tuples() -> None:
+    victim = Color(-0.5, 0.4, 1.7)
+    assert victim.red == -0.5
+    assert victim.green == 0.4
+    assert victim.blue == 1.7
+
+
+def test_color_repr_can_build_from_eval() -> None:
+    assert eval(repr(Color(1, 2, 3))) == Color(1, 2, 3)
+
+
+def test_color_equality() -> None:
+    assert Color(1, 2, 3) == Color(1, 2, 3)
