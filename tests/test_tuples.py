@@ -2,7 +2,7 @@ from math import sqrt
 
 import pytest
 
-from raytracer.tuples import Point, TupleFeature, Vector, magnitude, normalize, point, vector
+from raytracer.tuples import Point, TupleFeature, Vector, dot, magnitude, normalize, point, vector
 
 
 def test_point() -> None:
@@ -116,3 +116,7 @@ def test_point_repr_can_build_from_eval() -> None:
 
 def test_magnitude_of_normalized_vector_is_1() -> None:
     assert magnitude(normalize(vector(1, 2, 3))) == 1
+
+
+def test_dot_product_of_two_tuples() -> None:
+    assert dot(vector(1, 2, 3), vector(2, 3, 4)) == 20

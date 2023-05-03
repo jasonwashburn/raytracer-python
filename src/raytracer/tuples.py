@@ -91,3 +91,7 @@ def normalize(vec: Vector) -> Vector:
     return vector(
         vec.x / vector_magnitude, vec.y / vector_magnitude, vec.z / vector_magnitude, vec.w / vector_magnitude
     )
+
+
+def dot(vec_a: Vector, vec_b: Vector) -> int | float:
+    return (vec_a.x * vec_b.x) + (vec_a.y * vec_b.y) + (vec_a.z * vec_b.z) + (vec_a.w * vec_b.w)
