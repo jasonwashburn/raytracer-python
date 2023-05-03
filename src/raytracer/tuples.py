@@ -95,3 +95,15 @@ def normalize(vec: Vector) -> Vector:
 
 def dot(vec_a: Vector, vec_b: Vector) -> int | float:
     return (vec_a.x * vec_b.x) + (vec_a.y * vec_b.y) + (vec_a.z * vec_b.z) + (vec_a.w * vec_b.w)
+
+
+def cross(vec_a: Vector, vec_b: Vector) -> Vector:
+    """vector(a.y * b.z - a.z * b.y,
+    end function
+    a.z * b.x - a.x * b.z,
+    a.x * b.y - a.y * b.x)"""
+    return vector(
+        vec_a.y * vec_b.z - vec_a.z * vec_b.y,
+        vec_a.z * vec_b.x - vec_a.x * vec_b.z,
+        vec_a.x * vec_b.y - vec_a.y * vec_b.x,
+    )
