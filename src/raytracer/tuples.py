@@ -59,28 +59,35 @@ class TupleFeature:
 
 
 class Point(TupleFeature):
-    def __init__(self, coords: tuple[float, float, float]) -> None:
-        super().__init__((*coords, 1))
+    def __init__(self, coords: tuple[float, float, float, float]) -> None:
+        super().__init__(coords)
 
     def __repr__(self) -> str:
-        return f"Point({(self.x, self.y, self.z)})"
+        return f"Point({self.coords})"
 
 
 class Vector(TupleFeature):
-    def __init__(self, coords: tuple[float, float, float]) -> None:
-        super().__init__((*coords, 0))
+    def __init__(self, coords: tuple[float, float, float, float]) -> None:
+        super().__init__(coords)
 
     def __repr__(self) -> str:
-        return f"Vector({(self.x, self.y, self.z)})"
+        return f"Vector({self.coords})"
 
 
-def point(x: float, y: float, z: float) -> Point:
-    return Point((x, y, z))
+def point(x: float, y: float, z: float, w: float = 1) -> Point:
+    return Point((x, y, z, w))
 
 
-def vector(x: float, y: float, z: float) -> Vector:
-    return Vector((x, y, z))
+def vector(x: float, y: float, z: float, w: float = 0) -> Vector:
+    return Vector((x, y, z, w))
 
 
-def magnitude(vector: Vector) -> int | float:
-    return sqrt((vector.x**2) + (vector.y**2) + (vector.z**2) + (vector.w**2))
+def magnitude(vec: Vector) -> int | float:
+    return sqrt((vec.x**2) + (vec.y**2) + (vec.z**2) + (vec.w**2))
+
+
+def normalize(vec: Vector) -> Vector:
+    vector_magnitude = magnitude(vec)
+    return vector(
+        vec.x / vector_magnitude, vec.y / vector_magnitude, vec.z / vector_magnitude, vec.w / vector_magnitude
+    )

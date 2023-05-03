@@ -2,11 +2,11 @@ from math import sqrt
 
 import pytest
 
-from raytracer.tuples import Point, TupleFeature, Vector, magnitude, point, vector
+from raytracer.tuples import Point, TupleFeature, Vector, magnitude, normalize, point, vector
 
 
 def test_point() -> None:
-    victim = Point((4.3, -4.2, 3.1))
+    victim = Point((4.3, -4.2, 3.1, 1.0))
     assert victim.x == 4.3
     assert victim.y == -4.2
     assert victim.z == 3.1
@@ -16,7 +16,7 @@ def test_point() -> None:
 
 
 def test_vector() -> None:
-    victim = Vector((4.3, -4.2, 3.1))
+    victim = Vector((4.3, -4.2, 3.1, 0))
     assert victim.x == 4.3
     assert victim.y == -4.2
     assert victim.z == 3.1
@@ -67,6 +67,17 @@ def test_negating_a_tuple() -> None:
     assert -TupleFeature((1, -2, 3, -4)) == TupleFeature((-1, 2, -3, 4))
 
 
+@pytest.mark.parametrize(
+    "vector, expected",
+    [
+        (vector(4, 0, 0), vector(1, 0, 0)),
+        (vector(1, 2, 3), vector(1 / sqrt(14), 2 / sqrt(14), 3 / sqrt(14))),
+    ],
+)
+def test_normalize_vector(vector: Vector, expected: Vector) -> None:
+    assert normalize(vector) == expected
+
+
 def test_multiplying_tuple_by_a_scalar() -> None:
     assert TupleFeature((1, -2, 3, -4)) * 3.5 == TupleFeature((3.5, -7, 10.5, -14))
 
@@ -101,3 +112,7 @@ def test_vector_repr_can_build_from_eval() -> None:
 def test_point_repr_can_build_from_eval() -> None:
     victim = point(1, 2, 3)
     assert eval(repr(victim)) == victim
+
+
+def test_magnitude_of_normalized_vector_is_1() -> None:
+    assert magnitude(normalize(vector(1, 2, 3))) == 1
