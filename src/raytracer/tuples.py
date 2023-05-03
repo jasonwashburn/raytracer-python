@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from math import sqrt
+from math import isclose, sqrt
 
 
 class TupleFeature:
@@ -82,10 +82,36 @@ class Color:
         self.blue = blue
 
     def __eq__(self, other: object) -> bool:
-        return self.rgb == other
+        if not isinstance(other, Color):
+            return False
+        return isclose(self.red, other.red) and isclose(self.green, other.green) and isclose(self.blue, other.blue)
 
     def __repr__(self) -> str:
         return f"Color({self.red}, {self.green}, {self.blue})"
+
+    def __add__(self, other: Color) -> Color:
+        red = self.red + other.red
+        green = self.green + other.green
+        blue = self.blue + other.blue
+        return Color(red, green, blue)
+
+    def __sub__(self, other: Color) -> Color:
+        red = self.red - other.red
+        green = self.green - other.green
+        blue = self.blue - other.blue
+        return Color(red, green, blue)
+
+    def __mul__(self, other: int | float | Color) -> Color:
+        if isinstance(other, int | float):
+            red = self.red * other
+            green = self.green * other
+            blue = self.blue * other
+            return Color(red, green, blue)
+        if isinstance(other, Color):
+            red = self.red * other.red
+            green = self.green * other.green
+            blue = self.blue * other.blue
+            return Color(red, green, blue)
 
 
 def point(x: float, y: float, z: float, w: float = 1) -> Point:

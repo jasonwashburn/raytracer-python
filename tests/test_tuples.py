@@ -142,3 +142,19 @@ def test_color_repr_can_build_from_eval() -> None:
 
 def test_color_equality() -> None:
     assert Color(1, 2, 3) == Color(1, 2, 3)
+
+
+def test_adding_colors() -> None:
+    assert Color(0.9, 0.6, 0.75) + Color(0.7, 0.1, 0.25) == Color(1.6, 0.7, 1.0)
+
+
+def test_subtracting_colors() -> None:
+    assert Color(0.9, 0.6, 0.75) - Color(0.7, 0.1, 0.25) == Color(0.2, 0.5, 0.5)
+
+
+def test_multiplying_a_color_by_a_scalar() -> None:
+    assert Color(0.2, 0.3, 0.4) * 2 == Color(0.4, 0.6, 0.8)
+
+
+def test_multiplying_two_colors() -> None:
+    assert Color(1, 0.2, 0.4) * Color(0.9, 1, 0.1) == Color(0.9, 0.2, 0.04)
