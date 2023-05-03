@@ -33,6 +33,7 @@ path = "src/raytracer/__about__.py"
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
+  "pytest-cov",
   "pre-commit",
   "black",
   "ruff",
