@@ -1,4 +1,4 @@
-from raytracer.canvas import Canvas, pixel_at, write_pixel
+from raytracer.canvas import Canvas, canvas_to_ppm, pixel_at, write_pixel
 from raytracer.tuples import Color
 
 
@@ -14,3 +14,25 @@ def test_writing_pixels_to_canvas() -> None:
     red = Color(1, 0, 0)
     write_pixel(canvas, 2, 3, red)
     assert pixel_at(canvas, 2, 3) == red
+
+
+def test_construction_ppm_header() -> None:
+    canvas = Canvas(5, 3)
+    ppm = canvas_to_ppm(canvas)
+    assert ppm.split("\n")[:3] == ["P3", "5 3", "255"]
+
+
+def test_constructing_ppm_pixel_data() -> None:
+    canvas = Canvas(5, 3)
+    c1 = Color(1.5, 0, 0)
+    c2 = Color(0, 0.5, 0)
+    c3 = Color(-0.5, 0, 1)
+    write_pixel(canvas, 0, 0, c1)
+    write_pixel(canvas, 2, 1, c2)
+    write_pixel(canvas, 4, 2, c3)
+    ppm = canvas_to_ppm(canvas)
+    assert ppm.split("\n")[3:6] == [
+        "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+        "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
+        "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255",
+    ]

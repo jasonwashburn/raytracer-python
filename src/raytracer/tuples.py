@@ -101,6 +101,12 @@ class Color:
         blue = self.blue - other.blue
         return Color(red, green, blue)
 
+    def scaled_between(self, scale_min: int, scale_max: int) -> tuple[int, int, int]:
+        red = clamp(n=round(self.red * scale_max), clamp_min=scale_min, clamp_max=scale_max)
+        green = clamp(n=round(self.green * scale_max), clamp_min=scale_min, clamp_max=scale_max)
+        blue = clamp(n=round(self.blue * scale_max), clamp_min=scale_min, clamp_max=scale_max)
+        return (red, green, blue)
+
     def __mul__(self, other: int | float | Color) -> Color:
         if isinstance(other, int | float):
             red = self.red * other
@@ -143,3 +149,11 @@ def cross(vec_a: Vector, vec_b: Vector) -> Vector:
         vec_a.z * vec_b.x - vec_a.x * vec_b.z,
         vec_a.x * vec_b.y - vec_a.y * vec_b.x,
     )
+
+
+def clamp(n: int, clamp_min: int, clamp_max: int) -> int:
+    if n > clamp_max:
+        return clamp_max
+    if n < clamp_min:
+        return clamp_min
+    return n

@@ -2,7 +2,7 @@ from math import sqrt
 
 import pytest
 
-from raytracer.tuples import Color, Point, TupleFeature, Vector, cross, dot, magnitude, normalize, point, vector
+from raytracer.tuples import Color, Point, TupleFeature, Vector, clamp, cross, dot, magnitude, normalize, point, vector
 
 
 def test_point() -> None:
@@ -158,3 +158,17 @@ def test_multiplying_a_color_by_a_scalar() -> None:
 
 def test_multiplying_two_colors() -> None:
     assert Color(1, 0.2, 0.4) * Color(0.9, 1, 0.1) == Color(0.9, 0.2, 0.04)
+
+
+def test_color_scaled_between() -> None:
+    color = Color(0, 0.5, 1.5)
+    assert color.scaled_between(0, 255) == (0, 128, 255)
+
+
+def test_color_eq_returns_false_when_other_not_color() -> None:
+    assert Color(0, 0, 0) != [0, 0, 0]
+
+
+@pytest.mark.parametrize("number, clamp_min, clamp_max, expected", [(5, 0, 10, 5), (5, 10, 20, 10), (5, 0, 3, 3)])
+def test_clamp(number: int, clamp_min: int, clamp_max: int, expected: int) -> None:
+    assert clamp(number, clamp_min, clamp_max) == expected
