@@ -32,6 +32,30 @@ def test_3x3_matrix_out_to_be_representable() -> None:
     assert matrix[2, 2] == 1
 
 
+def test_construct_empty_matrix() -> None:
+    matrix = Matrix.new(rows=3, cols=3, fill=0)
+    assert matrix == Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+
+
+def test_new_matrix_with_fill() -> None:
+    matrix = Matrix.new(rows=3, cols=3, fill=1)
+    assert matrix == Matrix([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+
+
+def test_matrix_set_item() -> None:
+    matrix = Matrix.new(rows=3, cols=3)
+    matrix[1, 1] = 1
+    assert matrix == Matrix([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
+
+
+def test_matrix_rows() -> None:
+    assert Matrix([[1, 2], [3, 4], [5, 6]]).rows == 3
+
+
+def test_matrix_columns() -> None:
+    assert Matrix([[1, 2], [3, 4], [5, 6]]).columns == 2
+
+
 def test_matrix_equality_with_identical_matrices() -> None:
     elements: list[list[int | float]] = [
         [
@@ -113,3 +137,84 @@ def test_matrix_equality_with_non_matrix() -> None:
 
 def test_matrix_repr_builds_from_eval() -> None:
     assert eval(repr(Matrix([[1, 2], [3, 4]]))) == Matrix([[1, 2], [3, 4]])
+
+
+# Scenario: Multiplying two matrices
+# Given the following matrix A:
+# |1|2|3|4|
+# |5|6|7|8|
+# |9|8|7|6|
+# |5|4|3|2|
+# And the following matrix B:
+# |-2|1|2| 3|
+# | 3|2|1|-1|
+# | 4|3|6| 5|
+# | 1|2|7| 8|
+# Then A * B is the following 4x4 matrix:
+# |20| 22| 50| 48|
+# |44| 54|114|108|
+# |40| 58|110|102|
+# |16| 26| 46| 42|
+
+
+def test_multiplying_two_matrices() -> None:
+    matrix_a = Matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
+    matrix_b = Matrix(
+        [
+            [
+                -2,
+                1,
+                2,
+                3,
+            ],
+            [
+                3,
+                2,
+                1,
+                -1,
+            ],
+            [
+                4,
+                3,
+                6,
+                5,
+            ],
+            [
+                1,
+                2,
+                7,
+                8,
+            ],
+        ]
+    )
+    expected = Matrix(
+        [
+            [20, 22, 50, 48],
+            [44, 54, 114, 108],
+            [40, 58, 110, 102],
+            [16, 26, 46, 42],
+        ]
+    )
+
+    assert matrix_a * matrix_b == expected
+
+
+# Scenario: A matrix multiplied by a tuple Given the following matrix A:
+# |1|2|3|4|
+# |2|4|4|2|
+# |8|6|4|1|
+# |0|0|0|1|
+# And b ← tuple(1, 2, 3, 1)
+# Then A * b = tuple(18, 24, 33, 1)
+
+
+def test_matrix_multiplied_by_a_tuple() -> None:
+    matrix = Matrix(
+        [
+            [1, 2, 3, 4],
+            [2, 4, 4, 2],
+            [8, 6, 4, 1],
+            [0, 0, 0, 1],
+        ]
+    )
+    assert matrix * (1, 2, 3, 1) == (18, 24, 33, 1)
