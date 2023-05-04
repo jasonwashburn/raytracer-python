@@ -98,6 +98,8 @@ ignore = []
 unfixable = [
   # Don't touch unused imports
   "F401",
+  # Don't touch unused variables
+  "F841",
 ]
 
 [tool.ruff.isort]
