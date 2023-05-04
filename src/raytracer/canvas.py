@@ -42,5 +42,5 @@ def canvas_to_ppm(canvas: Canvas) -> str:
 
     pixel_section = "\n".join(pixels)
 
-    ppm = "\n".join([header, pixel_section])
+    ppm = "\n".join([header, pixel_section, "\n"])
     return ppm

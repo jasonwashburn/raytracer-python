@@ -45,18 +45,6 @@ def test_constructing_ppm_pixel_data() -> None:
     ]
 
 
-# Scenario: Splitting long lines in PPM files
-# Given c ← canvas(10, 2)
-# When every pixel of c is set to color(1, 0.8, 0.6)
-# And ppm ← canvas_to_ppm(c) Then lines 4-7 of ppm are
-#     """
-#     255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
-#     153 255 204 153 255 204 153 255 204 153 255 204 153
-#     255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
-#     153 255 204 153 255 204 153 255 204 153 255 204 153
-#     """
-
-
 def test_splitting_long_lines_in_ppm_files() -> None:
     color = Color(1, 0.8, 0.6)
     canvas = Canvas(width=10, height=2, bg_color=color)
@@ -67,3 +55,9 @@ def test_splitting_long_lines_in_ppm_files() -> None:
         "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
         "153 255 204 153 255 204 153 255 204 153 255 204 153",
     ]
+
+
+def test_ppm_terminated_by_newline_character() -> None:
+    canvas = Canvas(5, 3)
+    ppm = canvas_to_ppm(canvas)
+    assert ppm[-1] == "\n"
