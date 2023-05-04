@@ -57,6 +57,10 @@ class TupleFeature:
         w = self.w / other
         return TupleFeature((x, y, z, w))
 
+    def __str__(self) -> str:
+        x, y, z, w = self.coords
+        return f"TupleFeature(x: {x}, y: {y}, z: {z}, w: {w})"
+
 
 class Point(TupleFeature):
     def __init__(self, coords: tuple[float, float, float, float]) -> None:

@@ -114,6 +114,10 @@ def test_point_repr_can_build_from_eval() -> None:
     assert eval(repr(victim)) == victim
 
 
+def test_tuple_feature_to_str() -> None:
+    assert str(TupleFeature((0, 1, 2, 3))) == "TupleFeature(x: 0, y: 1, z: 2, w: 3)"
+
+
 def test_magnitude_of_normalized_vector_is_1() -> None:
     assert magnitude(normalize(vector(1, 2, 3))) == 1
 
