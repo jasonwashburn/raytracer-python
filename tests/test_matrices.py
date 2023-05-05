@@ -1,6 +1,6 @@
 import pytest
 
-from raytracer.matrices import Matrix, identity_matrix
+from raytracer.matrices import Matrix, identity_matrix, transpose
 
 
 def test_constructing_and_inspecting_a_4x4_matrix() -> None:
@@ -223,3 +223,23 @@ def test_multiplying_a_matrix_by_the_identity_matrix() -> None:
 def test_multiplying_identity_matrix_by_a_tuple() -> None:
     a = (1, 2, 3, 4)
     assert identity_matrix * a == a
+
+
+def test_transposing_a_matrix() -> None:
+    matrix = Matrix(
+        [
+            [0, 9, 3, 0],
+            [9, 8, 0, 8],
+            [1, 8, 5, 3],
+            [0, 0, 5, 8],
+        ]
+    )
+    expected = Matrix(
+        [
+            [0, 9, 1, 0],
+            [9, 8, 8, 0],
+            [3, 0, 5, 5],
+            [0, 8, 3, 8],
+        ]
+    )
+    assert transpose(matrix) == expected

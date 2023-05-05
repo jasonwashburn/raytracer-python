@@ -64,3 +64,12 @@ class Matrix:
 
 
 identity_matrix = Matrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+
+
+def transpose(matrix: Matrix) -> Matrix:
+    new_matrix = Matrix.new(rows=matrix.rows, cols=matrix.columns, fill=0.0)
+    for row in range(matrix.rows):
+        for col in range(matrix.columns):
+            new_matrix[row, col] = matrix[col, row]
+
+    return new_matrix
