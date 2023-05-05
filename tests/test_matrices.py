@@ -220,6 +220,6 @@ def test_multiplying_a_matrix_by_the_identity_matrix() -> None:
     assert matrix * identity_matrix == matrix
 
 
-def multiplying_identity_matrix_by_a_tuple() -> None:
+def test_multiplying_identity_matrix_by_a_tuple() -> None:
     a = (1, 2, 3, 4)
     assert identity_matrix * a == a
