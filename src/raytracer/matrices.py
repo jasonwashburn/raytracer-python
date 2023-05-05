@@ -61,3 +61,6 @@ class Matrix:
                     dot_product += self[row_idx, col_idx] * other[col_idx]
                 result[row_idx] = dot_product
             return tuple(result)
+
+
+identity_matrix = Matrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
